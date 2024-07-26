@@ -1,0 +1,109 @@
+
+body {
+    background: linear-gradient(0, #120c56, #000000);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    transition: background-color 0.3s;
+}
+
+.cloud-container {
+    position: relative;
+    width: 50vw; /* 50% da largura da viewport */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cloud {
+    width: 40vw; /* 40% da largura da viewport */
+    max-width: 300px; /* Limite máximo */
+    height: 20vw; /* 20% da largura da viewport */
+    max-height: 150px; /* Limite máximo */
+    background: #FFF;
+    border-radius: 50%;
+    position: absolute;
+    top: 20%;
+    animation: float 3s linear infinite, flash 5s linear infinite;
+    z-index: 2;
+}
+
+.cloud::before, .cloud::after {
+    content: '';
+    position: absolute;
+    background: #FFF;
+    width: 20vw; /* 20% da largura da viewport */
+    max-width: 150px; /* Limite máximo */
+    height: 20vw; /* 20% da largura da viewport */
+    max-height: 150px; /* Limite máximo */
+    border-radius: 50%;
+}
+
+.cloud::before {
+    top: -50%;
+    left: 10%;
+}
+
+.cloud::after {
+    top: -25%;
+    right: 10%;
+}
+
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes flash {
+    0%, 20%, 40%, 60%, 80%, 100% {
+        opacity: 1;
+    }
+    10%, 30%, 50%, 70%, 90% {
+        opacity: 0.1;
+    }
+}
+
+.rain {
+    position: absolute;
+    top: calc(20% + 20vw); /* Alinhado abaixo da nuvem */
+    width: 100%;
+    height: calc(100vh - (20% + 20vw)); /* Altura da chuva desde a nuvem até o chão */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    z-index: 1;
+}
+
+.drop {
+    width: 2px;
+    height: 100%; /* Gotas ocupam toda a altura do contêiner de chuva */
+    background: #00F;
+    margin: 1px;
+    animation: rain 2.5s linear infinite; /* Animação mais longa para queda mais lenta */
+}
+
+@keyframes rain {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(100vh); } /* Gotas caem por toda a altura da viewport */
+}
+
+.water {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 15px;
+    background: rgba(0, 0, 255, 0.5);
+    animation: ripple 2s linear infinite;
+}
+
+@keyframes ripple {
+    0% { transform: scaleX(1); }
+    50% { transform: scaleX(1.2); }
+    100% { transform: scaleX(1); }
+}
+
